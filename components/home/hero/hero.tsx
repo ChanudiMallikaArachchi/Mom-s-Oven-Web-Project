@@ -3,6 +3,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade, Pagination } from "swiper/modules";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
@@ -99,16 +100,22 @@ export default function Hero() {
                   </p>
 
                   <div className="mt-10 flex flex-wrap justify-center gap-4">
-                    <button className="group rounded-full bg-[#D9A11A] px-8 py-4 text-lg font-semibold text-white transition hover:scale-105 hover:shadow-xl">
+                    <Link
+                      href="/categories"
+                      className="group inline-flex items-center justify-center rounded-full bg-[#D9A11A] px-8 py-4 text-lg font-semibold text-white transition hover:scale-105 hover:shadow-xl"
+                    >
                       <span className="flex items-center gap-2">
                         Order Now
                         <ArrowRight className="group-hover:translate-x-1 transition" />
                       </span>
-                    </button>
+                    </Link>
 
-                    <button className="rounded-full border-2 border-white px-8 py-4 text-lg font-semibold text-white transition hover:bg-white hover:text-black">
+                    <Link
+                      href="/categories"
+                      className="inline-flex items-center justify-center rounded-full border-2 border-white px-8 py-4 text-lg font-semibold text-white transition hover:bg-white hover:text-black"
+                    >
                       View Cakes
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>

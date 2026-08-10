@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { ShoppingCart, Star } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -57,10 +58,13 @@ export default function CakeCard({ cake }: CakeCardProps) {
           Rs. {cake.price}
         </p>
 
-        <button className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-[#6F4422] py-3 font-semibold text-white transition hover:bg-[#D9A11A]">
+        <Link
+          href={`/cake/${cake.id}`}
+          className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-[#6F4422] py-3 font-semibold text-white transition hover:bg-[#D9A11A]"
+        >
           <ShoppingCart size={20} />
-          Add To Cart
-        </button>
+          View Details
+        </Link>
       </div>
     </motion.div>
   );

@@ -36,10 +36,11 @@ export default function CategoryCard({ category }: Props) {
             {category.description}
           </p>
 
-          <Link href={`/categories/${category.slug}`}>
-             <button className="mt-4 w-full rounded-xl bg-[#C97B2A] py-3 font-semibold text-white transition hover:bg-[#b56b20]">
-                View Details
-             </button>
+          <Link
+            href={`/categories/${category.slug}`}
+            className="mt-4 block w-full rounded-xl bg-[#C97B2A] py-3 text-center font-semibold text-white transition hover:bg-[#b56b20]"
+          >
+            View Details
           </Link>
         </div>
       </div>

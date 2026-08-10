@@ -44,7 +44,7 @@ export default function FeaturedCakes() {
         {/* Button */}
         <div className="mt-16 text-center">
           <Link
-            href="/shop"
+            href="/categories"
             className="rounded-full bg-[#D9A11A] px-8 py-4 font-semibold text-white transition hover:bg-[#6F4422]"
           >
             View All Cakes →

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function OrderSummary() {
   return (
     <div className="rounded-2xl bg-white p-6 shadow-md">
@@ -29,9 +31,12 @@ export default function OrderSummary() {
 
       </div>
 
-      <button className="mt-8 w-full rounded-full bg-[#6F4422] py-4 font-semibold text-white transition hover:bg-[#5A3619]">
+      <Link
+        href="/checkout"
+        className="mt-8 block w-full rounded-full bg-[#6F4422] py-4 text-center font-semibold text-white transition hover:bg-[#5A3619]"
+      >
         Proceed to Checkout
-      </button>
+      </Link>
 
     </div>
   );
