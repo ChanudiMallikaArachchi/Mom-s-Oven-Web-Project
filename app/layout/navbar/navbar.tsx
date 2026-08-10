@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, ShoppingCart, User, Search, X } from "lucide-react";
 
 const navLinks = [
@@ -15,6 +16,10 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isHome = pathname === "/";
+  const isSolid = !isHome || scrolled;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,8 +34,8 @@ export default function Navbar() {
   return (
     <header
       className={`fixed left-0 top-0 z-50 w-full transition-all duration-300 ${
-        scrolled
-          ? "bg-white shadow-lg py-3"
+        isSolid
+          ? "bg-white shadow-md py-3"
           : "bg-transparent py-5"
       }`}
     >
@@ -51,7 +56,7 @@ export default function Navbar() {
           <div>
             <h1
               className={`text-2xl font-bold transition ${
-                scrolled ? "text-[#6F4422]" : "text-white"
+                isSolid ? "text-[#6F4422]" : "text-white"
               }`}
             >
               Mom&apos;s Oven
@@ -59,7 +64,7 @@ export default function Navbar() {
 
             <p
               className={`text-xs tracking-[0.3em] uppercase transition ${
-                scrolled ? "text-[#D9A11A]" : "text-yellow-300"
+                isSolid ? "text-[#D9A11A]" : "text-yellow-300"
               }`}
             >
               Homemade Cakes
@@ -77,7 +82,7 @@ export default function Navbar() {
               key={item.name}
               href={item.href}
               className={`font-medium transition hover:text-[#D9A11A] ${
-                scrolled ? "text-[#6F4422]" : "text-white"
+                isSolid ? "text-[#6F4422]" : "text-white"
               }`}
             >
               {item.name}
@@ -92,20 +97,20 @@ export default function Navbar() {
 
           <button>
             <Search
-              className={scrolled ? "text-[#6F4422]" : "text-white"}
+              className={isSolid ? "text-[#6F4422]" : "text-white"}
             />
           </button>
 
           <button>
             <User
-              className={scrolled ? "text-[#6F4422]" : "text-white"}
+              className={isSolid ? "text-[#6F4422]" : "text-white"}
             />
           </button>
 
           <Link href="/cart" className="relative">
 
             <ShoppingCart
-              className={scrolled ? "text-[#6F4422]" : "text-white"}
+              className={isSolid ? "text-[#6F4422]" : "text-white"}
             />
 
             <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-[#D9A11A] text-xs text-white">
@@ -123,9 +128,9 @@ export default function Navbar() {
           className="lg:hidden"
         >
           {mobileOpen ? (
-            <X className={scrolled ? "text-[#6F4422]" : "text-white"} />
+            <X className={isSolid ? "text-[#6F4422]" : "text-white"} />
           ) : (
-            <Menu className={scrolled ? "text-[#6F4422]" : "text-white"} />
+            <Menu className={isSolid ? "text-[#6F4422]" : "text-white"} />
           )}
         </button>
 
