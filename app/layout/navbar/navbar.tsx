@@ -101,11 +101,11 @@ export default function Navbar() {
             />
           </button>
 
-          <button>
+          <Link href="/login">
             <User
               className={isSolid ? "text-[#6F4422]" : "text-white"}
             />
-          </button>
+          </Link>
 
           <Link href="/cart" className="relative">
 
