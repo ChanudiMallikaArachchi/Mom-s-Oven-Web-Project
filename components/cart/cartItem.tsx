@@ -12,6 +12,7 @@ export default function CartItem() {
           src="/images/image1.jpg"
           alt="Chocolate Cake"
           fill
+          sizes="128px"
           className="object-cover"
         />
       </div>
