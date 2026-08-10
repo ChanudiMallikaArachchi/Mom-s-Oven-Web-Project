@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, ShoppingCart, User, Search, X } from "lucide-react";
+import { Menu, ShoppingCart, User, Search, X, Sparkles } from "lucide-react";
 
 import { useAuth } from "@/context/AuthContext";
 
@@ -37,44 +37,49 @@ export default function Navbar() {
     <header
       className={`fixed left-0 top-0 z-50 w-full transition-all duration-300 ${
         isSolid
-          ? "bg-[#4A2C1D] shadow-2xl py-3 border-b border-white/10"
-          : "bg-gradient-to-b from-black/70 via-black/30 to-transparent py-5"
+          ? "bg-[#4A2C1D]/95 backdrop-blur-xl border-b border-[#D9A11A]/40 shadow-[0_10px_30px_rgba(74,44,29,0.5)] py-3"
+          : "bg-gradient-to-b from-black/80 via-black/40 to-transparent py-5"
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
 
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group">
-          <Image
-            src="/images/logo.JPG"
-            alt="Mom&apos;s Oven"
-            width={52}
-            height={52}
-            priority
-            className="rounded-full border-2 border-[#D9A11A] object-cover shadow-md transition group-hover:scale-105"
-          />
+          <div className="relative">
+            <Image
+              src="/images/logo.JPG"
+              alt="Mom&apos;s Oven"
+              width={54}
+              height={54}
+              priority
+              className="rounded-full border-2 border-[#D9A11A] object-cover ring-2 ring-[#D9A11A]/50 shadow-[0_0_15px_rgba(217,161,26,0.4)] transition group-hover:scale-105"
+            />
+          </div>
 
           <div>
-            <h1 className="text-2xl font-bold text-white transition group-hover:text-[#D9A11A] drop-shadow">
+            <h1 className="text-2xl font-black tracking-wide text-white transition group-hover:text-[#D9A11A] drop-shadow-md flex items-center gap-1.5">
               Mom&apos;s Oven
+              <Sparkles size={16} className="text-[#D9A11A] animate-pulse" />
             </h1>
 
-            <p className="text-[10px] tracking-[0.3em] uppercase text-[#D9A11A] font-bold drop-shadow">
+            <p className="text-[10px] tracking-[0.25em] uppercase text-[#D9A11A] font-extrabold drop-shadow">
               Homemade Cakes
             </p>
           </div>
         </Link>
 
-        {/* Desktop Menu */}
-        <nav className="hidden lg:flex items-center gap-9">
+        {/* Desktop Highlighted Pill Menu */}
+        <nav className="hidden lg:flex items-center gap-2 bg-black/25 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10 shadow-inner">
           {navLinks.map((item) => {
             const isActive = pathname === item.href;
             return (
               <Link
                 key={item.name}
                 href={item.href}
-                className={`text-base font-semibold text-white transition hover:text-[#D9A11A] drop-shadow ${
-                  isActive ? "text-[#D9A11A] font-bold border-b-2 border-[#D9A11A] pb-0.5" : ""
+                className={`px-5 py-2 rounded-full text-sm font-bold transition-all duration-300 ${
+                  isActive
+                    ? "bg-[#C97B2A] text-white shadow-md scale-105"
+                    : "text-white/90 hover:bg-white/15 hover:text-[#D9A11A]"
                 }`}
               >
                 {item.name}
@@ -83,10 +88,10 @@ export default function Navbar() {
           })}
         </nav>
 
-        {/* Right Icons & Action Buttons */}
-        <div className="hidden lg:flex items-center gap-5">
-          <button aria-label="Search" className="text-white hover:text-[#D9A11A] transition p-1.5 drop-shadow">
-            <Search size={22} />
+        {/* Right Icons & Highlighted Action Buttons */}
+        <div className="hidden lg:flex items-center gap-4">
+          <button aria-label="Search" className="rounded-full p-2.5 text-white/90 hover:bg-white/15 hover:text-[#D9A11A] transition drop-shadow">
+            <Search size={20} />
           </button>
 
           {/* Account Profile Icon -> Links directly to /account */}
@@ -94,26 +99,26 @@ export default function Navbar() {
             href="/account"
             aria-label="User Account"
             title={isLoggedIn ? `Dashboard (${user?.name})` : "My Account"}
-            className="relative text-white hover:text-[#D9A11A] transition p-1.5 drop-shadow"
+            className="relative rounded-full p-2.5 text-white/90 hover:bg-white/15 hover:text-[#D9A11A] transition drop-shadow"
           >
-            <User size={22} />
+            <User size={20} />
             {isLoggedIn && (
-              <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-green-500 ring-2 ring-[#4A2C1D]" />
+              <span className="absolute bottom-1 right-1 h-3 w-3 rounded-full bg-green-500 ring-2 ring-[#4A2C1D] shadow" />
             )}
           </Link>
 
           {/* Cart Icon */}
-          <Link href="/cart" className="relative text-white hover:text-[#D9A11A] transition p-1.5 drop-shadow" aria-label="Shopping Cart" title="View Cart">
-            <ShoppingCart size={22} />
-            <span className="absolute -right-1.5 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#D9A11A] text-xs font-bold text-white shadow-md">
+          <Link href="/cart" className="relative rounded-full p-2.5 text-white/90 hover:bg-white/15 hover:text-[#D9A11A] transition drop-shadow" aria-label="Shopping Cart" title="View Cart">
+            <ShoppingCart size={20} />
+            <span className="absolute -right-1 -top-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-[#D9A11A] text-[11px] font-extrabold text-white shadow-lg ring-2 ring-[#4A2C1D]">
               0
             </span>
           </Link>
 
-          {/* Login Button to Login Page */}
+          {/* Highlighted Login Button */}
           <Link
             href="/login"
-            className="ml-2 rounded-full bg-[#C97B2A] px-6 py-2 text-sm font-bold text-white shadow-lg transition hover:bg-[#B86A1D] hover:scale-105"
+            className="ml-2 rounded-full bg-gradient-to-r from-[#C97B2A] to-[#D9A11A] px-7 py-2.5 text-sm font-extrabold text-white shadow-[0_4px_15px_rgba(201,123,42,0.4)] transition duration-300 hover:from-[#D9A11A] hover:to-[#C97B2A] hover:scale-105 hover:shadow-xl"
           >
             Login
           </Link>
@@ -122,7 +127,7 @@ export default function Navbar() {
         {/* Mobile Toggle Button */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="lg:hidden text-white p-2"
+          className="lg:hidden text-white p-2 rounded-xl bg-white/10 backdrop-blur-sm"
           aria-label="Toggle Menu"
         >
           {mobileOpen ? <X size={26} /> : <Menu size={26} />}
@@ -132,22 +137,29 @@ export default function Navbar() {
 
       {/* Mobile Dropdown Menu */}
       {mobileOpen && (
-        <div className="bg-[#4A2C1D] border-t border-white/15 lg:hidden shadow-2xl">
+        <div className="bg-[#4A2C1D] border-t border-[#D9A11A]/30 lg:hidden shadow-2xl">
           <nav className="flex flex-col p-6 space-y-2">
-            {navLinks.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="border-b border-white/10 py-3.5 text-white font-semibold text-lg transition hover:text-[#D9A11A]"
-                onClick={() => setMobileOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navLinks.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`rounded-2xl px-4 py-3.5 font-bold text-lg transition ${
+                    isActive
+                      ? "bg-[#C97B2A] text-white shadow-md"
+                      : "text-white/90 hover:bg-white/10 hover:text-[#D9A11A]"
+                  }`}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
 
             <Link
               href="/account"
-              className="flex items-center gap-3 border-b border-white/10 py-3.5 font-semibold text-white text-lg hover:text-[#D9A11A]"
+              className="flex items-center gap-3 rounded-2xl px-4 py-3.5 font-bold text-white text-lg hover:bg-white/10 hover:text-[#D9A11A]"
               onClick={() => setMobileOpen(false)}
             >
               <User size={22} />
@@ -156,7 +168,7 @@ export default function Navbar() {
 
             <Link
               href="/login"
-              className="mt-4 flex items-center justify-center rounded-full bg-[#C97B2A] py-3 text.base font-bold text-white shadow-lg transition hover:bg-[#B86A1D]"
+              className="mt-4 flex items-center justify-center rounded-full bg-gradient-to-r from-[#C97B2A] to-[#D9A11A] py-3.5 text-base font-extrabold text-white shadow-lg transition hover:scale-105"
               onClick={() => setMobileOpen(false)}
             >
               Login
