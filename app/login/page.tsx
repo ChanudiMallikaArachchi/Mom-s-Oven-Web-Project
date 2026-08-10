@@ -157,6 +157,8 @@ export default function LoginPage() {
                   </svg>
                   Facebook
                 </button>
+              </div>
+
               {/* Create Account Section */}
               <div className="mt-6 pt-6 border-t border-gray-100 text-center">
                 <p className="text-sm font-medium text-gray-600 mb-3">
@@ -174,14 +176,6 @@ export default function LoginPage() {
             </form>
           )}
         </div>
-
-        {/* Footer Link */}
-        <p className="mt-8 text-center text-sm text-gray-600">
-          Don&apos;t have an account?{" "}
-          <Link href="/signup" className="font-bold text-[#C97B2A] hover:underline">
-            Create an Account
-          </Link>
-        </p>
 
       </div>
     </main>
