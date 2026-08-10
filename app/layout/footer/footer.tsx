@@ -96,6 +96,12 @@ export default function Footer() {
                 </Link>
               </li>
 
+              <li>
+                <Link href="/admin" className="font-semibold text-[#D9A11A] hover:underline">
+                  Admin Panel
+                </Link>
+              </li>
+
             </ul>
 
           </div>
