@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
-import { User, Package, MapPin, LogOut, CheckCircle2, Clock, Truck, ChevronRight } from "lucide-react";
+import { User, Package, MapPin, LogOut, CheckCircle2, Clock, ChevronRight } from "lucide-react";
 
 export default function AccountPage() {
   const { user, isLoggedIn, logout, login } = useAuth();
@@ -12,25 +12,14 @@ export default function AccountPage() {
 
   const [activeTab, setActiveTab] = useState<"profile" | "orders" | "addresses">("profile");
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    address: "",
-  });
+  const [formData, setFormData] = useState(() => ({
+    name: user?.name || "",
+    email: user?.email || "",
+    phone: user?.phone || "+94 77 123 4567",
+    address: user?.address || "123 Main Street, Colombo, Sri Lanka",
+  }));
 
   const [savedSuccess, setSavedSuccess] = useState(false);
-
-  useEffect(() => {
-    if (user) {
-      setFormData({
-        name: user.name || "",
-        email: user.email || "",
-        phone: user.phone || "+94 77 123 4567",
-        address: user.address || "123 Main Street, Colombo, Sri Lanka",
-      });
-    }
-  }, [user]);
 
   // Sample order history data
   const orders = [

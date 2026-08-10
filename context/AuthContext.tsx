@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode } from "react";
 
 export interface UserProfile {
   name: string;
@@ -24,28 +24,32 @@ const AuthContext = createContext<AuthContextType>({
 });
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<UserProfile | null>(null);
-
-  useEffect(() => {
-    // Check localStorage for saved session
-    const savedUser = localStorage.getItem("momsoven_user");
-    if (savedUser) {
-      try {
-        setUser(JSON.parse(savedUser));
-      } catch (e) {
-        console.error("Failed to parse saved user", e);
+  const [user, setUser] = useState<UserProfile | null>(() => {
+    if (typeof window !== "undefined") {
+      const savedUser = localStorage.getItem("momsoven_user");
+      if (savedUser) {
+        try {
+          return JSON.parse(savedUser);
+        } catch (e) {
+          console.error("Failed to parse saved user", e);
+        }
       }
     }
-  }, []);
+    return null;
+  });
 
   const login = (userData: UserProfile) => {
     setUser(userData);
-    localStorage.setItem("momsoven_user", JSON.stringify(userData));
+    if (typeof window !== "undefined") {
+      localStorage.setItem("momsoven_user", JSON.stringify(userData));
+    }
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem("momsoven_user");
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("momsoven_user");
+    }
   };
 
   return (
