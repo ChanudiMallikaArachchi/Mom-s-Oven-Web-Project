@@ -15,16 +15,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const navItems = [
     { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
-    { name: "Manage Cakes", href: "/admin/cakes", icon: Cake },
+    { name: "Cakes", href: "/admin/cakes", icon: Cake },
     { name: "Add Cake", href: "/admin/add-cake", icon: PlusCircle },
-    { name: "Manage Orders", href: "/admin/orders", icon: ShoppingBag },
+    { name: "Orders", href: "/admin/orders", icon: ShoppingBag },
   ];
 
   return (
-    <div className="min-h-screen bg-[#F9F6F0] pt-20">
+    <div className="min-h-screen bg-[#F9F6F0] pt-20 pb-24 md:pb-12">
       <div className="flex">
         
-        {/* Left Sidebar */}
+        {/* Left Sidebar (Desktop) */}
         <aside className="fixed left-0 top-20 z-40 h-[calc(100vh-5rem)] w-64 border-r border-gray-200 bg-white p-6 shadow-sm hidden md:block">
           <div className="mb-8">
             <h2 className="text-xl font-bold text-[#4A2C1D]">Admin Panel</h2>
@@ -62,8 +62,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </div>
         </aside>
 
-        {/* Mobile Sub-Navigation Header */}
-        <div className="md:hidden fixed top-20 left-0 right-0 z-30 bg-white border-b border-gray-200 p-3 overflow-x-auto flex gap-2">
+        {/* Fixed Mobile Bottom Navigation Bar */}
+        <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 px-3 py-2 shadow-2xl flex items-center justify-around">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = pathname === item.href;
@@ -71,21 +71,27 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <Link
                 key={item.name}
                 href={item.href}
-                className={`flex items-center gap-1.5 whitespace-nowrap rounded-xl px-4 py-2 text-xs font-semibold transition ${
+                className={`flex flex-col items-center gap-1 px-3 py-1 rounded-xl text-[11px] font-semibold transition ${
                   isActive
-                    ? "bg-[#C97B2A] text-white shadow"
-                    : "bg-gray-100 text-gray-700"
+                    ? "text-[#C97B2A]"
+                    : "text-gray-500 hover:text-[#4A2C1D]"
                 }`}
               >
-                <Icon size={16} />
-                {item.name}
+                <div
+                  className={`p-1.5 rounded-xl transition ${
+                    isActive ? "bg-[#FFF8F2] text-[#C97B2A]" : ""
+                  }`}
+                >
+                  <Icon size={20} />
+                </div>
+                <span>{item.name}</span>
               </Link>
             );
           })}
-        </div>
+        </nav>
 
         {/* Main Content View Container */}
-        <div className="flex-1 md:ml-64 p-6 md:p-10">
+        <div className="flex-1 md:ml-64 p-4 md:p-10 w-full overflow-hidden">
           {children}
         </div>
 
