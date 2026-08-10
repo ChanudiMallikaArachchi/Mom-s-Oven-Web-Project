@@ -9,7 +9,7 @@ export default function CartItem() {
 
       <div className="relative h-32 w-32 overflow-hidden rounded-xl">
         <Image
-          src="/images/image1.jpg"
+          src="/images/cake1.jpeg"
           alt="Chocolate Cake"
           fill
           sizes="128px"

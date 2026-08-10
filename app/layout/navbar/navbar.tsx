@@ -41,8 +41,8 @@ export default function Navbar() {
         <Link href="/" className="flex items-center gap-3">
 
           <Image
-            src="/images/logo.jpg"
-            alt="Mom's Oven"
+            src="/images/logo.JPG"
+            alt="Mom&apos;s Oven"
             width={55}
             height={55}
             priority

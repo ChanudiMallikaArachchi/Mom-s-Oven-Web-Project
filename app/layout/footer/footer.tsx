@@ -32,7 +32,7 @@ export default function Footer() {
 
             <Image
               src="/images/logo.JPG"
-              alt="Mom's Oven"
+              alt="Mom&apos;s Oven"
               width={150}
               height={150}
               className="mb-5 rounded-full object-cover"

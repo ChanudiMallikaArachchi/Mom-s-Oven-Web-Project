@@ -65,7 +65,7 @@ export const categorySections: CategorySection[] = [
         name: "Bento Cakes",
         slug: "bento-cakes",
         cakeSlug: "kitkat-bento-cake",
-        image: "/images/bentoCakePack2.jpeg",
+        image: "/images/bentoCakepack2.jpeg",
         description: "Cute mini cakes for small celebrations.",
       },
       {
@@ -73,7 +73,7 @@ export const categorySections: CategorySection[] = [
         name: "Cupcakes",
         slug: "cupcakes",
         cakeSlug: "blueberry-cupcake",
-        image: "/images/cupcake1.jpeg",
+        image: "/images/cupCake1.jpeg",
         description: "Fresh homemade cupcakes.",
       },
     ],
