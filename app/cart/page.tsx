@@ -3,7 +3,7 @@ import OrderSummary from "@/components/cart/orderSummary";
 
 export default function CartPage() {
   return (
-    <main className="min-h-screen bg-[#FFF8F2] py-20">
+    <main className="min-h-screen bg-[#FFF8F2] pb-24 pt-28">
 
       <div className="mx-auto max-w-7xl px-6">
 

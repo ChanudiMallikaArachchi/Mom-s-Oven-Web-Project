@@ -1,9 +1,15 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { Trash2 } from "lucide-react";
 
 export default function CartItem() {
+  const [quantity, setQuantity] = useState(1);
+  const [removed, setRemoved] = useState(false);
+
+  if (removed) return null;
+
   return (
     <div className="flex flex-col gap-6 rounded-2xl bg-white p-5 shadow-md md:flex-row md:items-center">
 
@@ -27,25 +33,34 @@ export default function CartItem() {
         </p>
 
         <p className="mt-3 text-xl font-semibold text-[#6F4422]">
-          Rs. 4,500
+          Rs. {(4500 * quantity).toLocaleString()}
         </p>
       </div>
 
       <div className="flex items-center gap-3">
-        <button className="h-10 w-10 rounded-lg bg-gray-200 text-xl">
+        <button
+          onClick={() => setQuantity(Math.max(1, quantity - 1))}
+          className="h-10 w-10 rounded-lg bg-gray-200 text-xl transition hover:bg-gray-300"
+        >
           -
         </button>
 
         <span className="w-8 text-center font-semibold">
-          1
+          {quantity}
         </span>
 
-        <button className="h-10 w-10 rounded-lg bg-gray-200 text-xl">
+        <button
+          onClick={() => setQuantity(quantity + 1)}
+          className="h-10 w-10 rounded-lg bg-gray-200 text-xl transition hover:bg-gray-300"
+        >
           +
         </button>
       </div>
 
-      <button className="rounded-lg p-3 text-red-500 transition hover:bg-red-50">
+      <button
+        onClick={() => setRemoved(true)}
+        className="rounded-lg p-3 text-red-500 transition hover:bg-red-50"
+      >
         <Trash2 size={22} />
       </button>
 

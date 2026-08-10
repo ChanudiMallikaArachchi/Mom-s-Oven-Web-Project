@@ -3,7 +3,7 @@ import CategorySection from "./categorySection";
 
 export default function CategoriesContent() {
   return (
-    <section className="bg-[#FFF8F2] py-24">
+    <section className="min-h-screen bg-[#FFF8F2] pb-24 pt-8">
 
       <div className="mx-auto max-w-7xl px-6">
 

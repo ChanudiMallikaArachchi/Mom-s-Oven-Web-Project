@@ -20,7 +20,7 @@ export default async function CakeDetailsPage({ params }: Props) {
   if (!cake) return notFound();
 
   return (
-    <section className="bg-[#FFF8F2] py-16">
+    <section className="min-h-screen bg-[#FFF8F2] pb-24 pt-28">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid gap-16 lg:grid-cols-2">
           

@@ -21,7 +21,9 @@ export default async function CategoryDetailsPage({ params }: Props) {
   }
 
   // Filter cakes by category slug
-  const categoryCakes = cakes.filter((c) => c.category === category.slug.replace(/-cakes$/, ""));
+  const categoryCakes = cakes.filter(
+    (c) => c.category === category.slug || category.slug.includes(c.category) || c.category.includes(category.slug)
+  );
 
   return (
     <main className="min-h-screen bg-[#FFF8F2] pb-24 pt-28">
@@ -38,18 +40,17 @@ export default async function CategoryDetailsPage({ params }: Props) {
         {categoryCakes.length > 0 ? (
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {categoryCakes.map((cake) => (
-              <Link key={cake.id} href={`/cake/${cake.id}`}>
-                <CakeCard
-                  cake={{
-                    id: cake.id,
-                    name: cake.name,
-                    price: cake.price,
-                    image: cake.image,
-                    rating: 5,
-                    badge: "In Stock",
-                  }}
-                />
-              </Link>
+              <CakeCard
+                key={cake.id}
+                cake={{
+                  id: cake.id,
+                  name: cake.name,
+                  price: cake.price,
+                  image: cake.image,
+                  rating: 5,
+                  badge: "In Stock",
+                }}
+              />
             ))}
           </div>
         ) : (
