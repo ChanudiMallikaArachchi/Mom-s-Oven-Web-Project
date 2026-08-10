@@ -26,10 +26,9 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 30);
+      setScrolled(window.scrollY > 40);
     };
 
-    handleScroll();
     window.addEventListener("scroll", handleScroll);
 
     return () => window.removeEventListener("scroll", handleScroll);
@@ -37,176 +36,125 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed left-0 top-0 z-50 w-full transition-all duration-500 ease-in-out ${
+      className={`fixed left-0 top-0 z-50 w-full transition-all duration-300 ${
         isSolid
-          ? "bg-white/95 backdrop-blur-md shadow-md py-3 border-b border-amber-900/5 text-gray-900"
-          : "bg-gradient-to-b from-black/70 via-black/40 to-transparent backdrop-blur-[2px] py-5 text-white"
+          ? "bg-[#4A2C1D]/95 backdrop-blur-md shadow-xl py-3"
+          : "bg-transparent py-5"
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
 
-        {/* Logo & Brand Name */}
-        <Link href="/" className="flex items-center gap-3.5 group">
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-3 group">
           <Image
             src="/images/logo.JPG"
             alt="Mom&apos;s Oven"
             width={52}
             height={52}
             priority
-            className="rounded-full shadow-sm transition-transform duration-300 group-hover:scale-105"
+            className="rounded-full border-2 border-[#D9A11A]/60 object-cover shadow-sm transition group-hover:scale-105"
           />
 
           <div>
-            <h1
-              className={`text-2xl font-bold tracking-tight transition-colors duration-300 ${
-                isSolid ? "text-[#4A2C1D]" : "text-white drop-shadow-md"
-              }`}
-            >
+            <h1 className="text-2xl font-bold text-white transition group-hover:text-[#D9A11A]">
               Mom&apos;s Oven
             </h1>
 
-            <p
-              className={`text-[11px] font-bold tracking-[0.25em] uppercase transition-colors duration-300 ${
-                isSolid ? "text-[#C97B2A]" : "text-[#D9A11A]"
-              }`}
-            >
+            <p className="text-[10px] tracking-[0.3em] uppercase text-[#D9A11A] font-semibold">
               Homemade Cakes
             </p>
           </div>
         </Link>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-8">
-          {navLinks.map((item) => {
-            const isActive = pathname === item.href;
-            return (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`relative py-1 text-base font-bold transition-all duration-300 hover:text-[#C97B2A] ${
-                  isActive
-                    ? "text-[#C97B2A]"
-                    : isSolid
-                    ? "text-[#4A2C1D]"
-                    : "text-white drop-shadow"
-                }`}
-              >
-                {item.name}
-                {isActive && (
-                  <span className="absolute bottom-0 left-0 h-0.5 w-full bg-[#C97B2A] rounded-full" />
-                )}
-              </Link>
-            );
-          })}
+        {/* Desktop Menu */}
+        <nav className="hidden lg:flex items-center gap-10">
+          {navLinks.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className={`font-semibold text-white transition hover:text-[#D9A11A] ${
+                pathname === item.href ? "text-[#D9A11A] font-bold border-b-2 border-[#D9A11A] pb-0.5" : ""
+              }`}
+            >
+              {item.name}
+            </Link>
+          ))}
         </nav>
 
-        {/* Right Icons & Auth Buttons */}
+        {/* Right Icons & Action Buttons */}
         <div className="hidden lg:flex items-center gap-5">
-          
-          <button aria-label="Search" className="transition hover:scale-110">
-            <Search
-              size={22}
-              className={`transition-colors duration-300 ${
-                isSolid ? "text-[#4A2C1D] hover:text-[#C97B2A]" : "text-white hover:text-[#D9A11A]"
-              }`}
-            />
+          <button aria-label="Search" className="text-white hover:text-[#D9A11A] transition p-1">
+            <Search size={22} />
           </button>
 
-          {/* Account Profile Icon */}
+          {/* Account Profile Icon -> Links directly to /account */}
           <Link
             href="/account"
             aria-label="User Account"
             title={isLoggedIn ? `Dashboard (${user?.name})` : "My Account"}
-            className="relative transition hover:scale-110"
+            className="relative text-white hover:text-[#D9A11A] transition p-1"
           >
-            <User
-              size={22}
-              className={`transition-colors duration-300 ${
-                isSolid ? "text-[#4A2C1D] hover:text-[#C97B2A]" : "text-white hover:text-[#D9A11A]"
-              }`}
-            />
+            <User size={22} />
             {isLoggedIn && (
-              <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-green-500 ring-2 ring-white" />
+              <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-green-500 ring-2 ring-[#4A2C1D]" />
             )}
           </Link>
 
           {/* Cart Icon */}
-          <Link
-            href="/cart"
-            className="relative transition hover:scale-110"
-            aria-label="Shopping Cart"
-            title="View Cart"
-          >
-            <ShoppingCart
-              size={22}
-              className={`transition-colors duration-300 ${
-                isSolid ? "text-[#4A2C1D] hover:text-[#C97B2A]" : "text-white hover:text-[#D9A11A]"
-              }`}
-            />
-
-            <span className="absolute -right-2.5 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-[#C97B2A] text-[11px] font-bold text-white shadow">
+          <Link href="/cart" className="relative text-white hover:text-[#D9A11A] transition p-1" aria-label="Shopping Cart" title="View Cart">
+            <ShoppingCart size={22} />
+            <span className="absolute -right-2 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#D9A11A] text-xs font-bold text-white shadow">
               0
             </span>
           </Link>
 
-          {/* Login Button */}
+          {/* Login Button to Login Page */}
           <Link
             href="/login"
-            className="ml-2 rounded-full bg-[#C97B2A] px-6 py-2.5 text-sm font-bold text-white shadow-md transition-all duration-300 hover:bg-[#B86A1D] hover:shadow-lg hover:scale-105"
+            className="ml-2 rounded-full bg-[#C97B2A] px-6 py-2.5 text-sm font-bold text-white shadow-lg transition hover:bg-[#B86A1D] hover:scale-105"
           >
             Login
           </Link>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Toggle Button */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="lg:hidden p-2 rounded-lg"
+          className="lg:hidden text-white p-2"
           aria-label="Toggle Menu"
         >
-          {mobileOpen ? (
-            <X className={isSolid ? "text-[#4A2C1D]" : "text-white"} size={26} />
-          ) : (
-            <Menu className={isSolid ? "text-[#4A2C1D]" : "text-white"} size={26} />
-          )}
+          {mobileOpen ? <X size={26} /> : <Menu size={26} />}
         </button>
 
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Dropdown Menu */}
       {mobileOpen && (
-        <div className="bg-white border-b border-gray-200 lg:hidden shadow-2xl animate-fade-in">
-          <nav className="flex flex-col p-6 space-y-3">
-            {navLinks.map((item) => {
-              const isActive = pathname === item.href;
-              return (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={`rounded-xl px-4 py-3 text-base font-bold transition ${
-                    isActive
-                      ? "bg-[#FFF8F2] text-[#C97B2A]"
-                      : "text-[#4A2C1D] hover:bg-gray-50"
-                  }`}
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              );
-            })}
+        <div className="bg-[#4A2C1D] border-t border-white/10 lg:hidden shadow-2xl">
+          <nav className="flex flex-col p-6 space-y-2">
+            {navLinks.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="border-b border-white/10 py-3 text-white font-semibold transition hover:text-[#D9A11A]"
+                onClick={() => setMobileOpen(false)}
+              >
+                {item.name}
+              </Link>
+            ))}
 
             <Link
               href="/account"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-base font-bold text-[#4A2C1D] hover:bg-gray-50 transition"
+              className="flex items-center gap-3 border-b border-white/10 py-3 font-semibold text-white hover:text-[#D9A11A]"
               onClick={() => setMobileOpen(false)}
             >
-              <User size={20} className="text-[#C97B2A]" />
+              <User size={20} />
               {isLoggedIn ? `My Account (${user?.name})` : "My Account"}
             </Link>
 
             <Link
               href="/login"
-              className="mt-2 flex items-center justify-center rounded-full bg-[#C97B2A] py-3 text-sm font-bold text-white shadow-md transition hover:bg-[#B86A1D]"
+              className="mt-4 flex items-center justify-center rounded-full bg-[#C97B2A] py-3 text-sm font-bold text-white shadow transition hover:bg-[#B86A1D]"
               onClick={() => setMobileOpen(false)}
             >
               Login
