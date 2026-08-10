@@ -1,22 +1,16 @@
 "use client";
 
-import { motion } from "framer-motion";
 import CakeCard from "./cakeCard";
 import { featuredCakes } from "@/app/data/featuredCakes";
 import Link from "next/link";
 
 export default function FeaturedCakes() {
   return (
-    <section id="featured-cakes" className="bg-[#FFF8F2] py-24">
+    <section id="featured-cakes" className="bg-[#FFF8F2] py-20 md:py-24">
       <div className="mx-auto max-w-7xl px-6">
 
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center"
-        >
-          <h2 className="text-5xl font-bold text-[#6F4422]">
+        <div className="text-center">
+          <h2 className="text-4xl sm:text-5xl font-bold text-[#6F4422]">
             Featured Cakes
           </h2>
 
@@ -24,20 +18,14 @@ export default function FeaturedCakes() {
             Discover our handcrafted cakes baked with love and the finest
             ingredients for every celebration.
           </p>
-        </motion.div>
+        </div>
 
         {/* Cards */}
         <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {featuredCakes.map((cake, index) => (
-            <motion.div
-              key={cake.id}
-              initial={{ opacity: 0, y: 70 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.15 }}
-            >
+          {featuredCakes.map((cake) => (
+            <div key={cake.id}>
               <CakeCard cake={cake} />
-            </motion.div>
+            </div>
           ))}
         </div>
 
@@ -45,7 +33,7 @@ export default function FeaturedCakes() {
         <div className="mt-16 text-center">
           <Link
             href="/categories"
-            className="rounded-full bg-[#D9A11A] px-8 py-4 font-semibold text-white transition hover:bg-[#6F4422]"
+            className="inline-block rounded-full bg-[#D9A11A] px-8 py-4 font-semibold text-white transition hover:bg-[#6F4422] shadow-md"
           >
             View All Cakes →
           </Link>

@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const categories = [
@@ -46,15 +45,10 @@ const categories = [
 
 export default function CategoriesShowcase() {
   return (
-    <section className="bg-white py-20">
+    <section className="bg-white py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-6">
         
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6"
-        >
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div>
             <span className="text-xs font-bold uppercase tracking-widest text-[#C97B2A]">
               Bakery Catalog
@@ -69,26 +63,20 @@ export default function CategoriesShowcase() {
 
           <Link
             href="/categories"
-            className="group inline-flex items-center gap-2 rounded-full border border-gray-200 bg-gray-50 px-6 py-3 text-sm font-bold text-[#4A2C1D] transition hover:bg-[#C97B2A] hover:text-white shadow-sm"
+            className="group inline-flex items-center gap-2 rounded-full border border-gray-200 bg-gray-50 px-6 py-3 text-sm font-bold text-[#4A2C1D] transition hover:bg-[#C97B2A] hover:text-white shadow-sm self-start md:self-auto"
           >
             All Categories
             <ArrowRight size={18} className="transition group-hover:translate-x-1" />
           </Link>
-        </motion.div>
+        </div>
 
         {/* Categories Grid */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {categories.map((cat, index) => (
-            <motion.div
-              key={cat.slug}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-            >
+          {categories.map((cat) => (
+            <div key={cat.slug}>
               <Link
                 href={`/categories/${cat.slug}`}
-                className="group relative block overflow-hidden rounded-3xl bg-[#FFF8F2] p-4 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+                className="group relative block overflow-hidden rounded-3xl bg-[#FFF8F2] p-4 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl border border-gray-100"
               >
                 <div className="relative h-56 w-full overflow-hidden rounded-2xl">
                   <Image
@@ -116,7 +104,7 @@ export default function CategoriesShowcase() {
                   </div>
                 </div>
               </Link>
-            </motion.div>
+            </div>
           ))}
         </div>
 
