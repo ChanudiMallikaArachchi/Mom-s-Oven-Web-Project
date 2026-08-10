@@ -2,7 +2,7 @@
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade, Pagination } from "swiper/modules";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import "swiper/css";
@@ -118,16 +118,26 @@ export default function Hero() {
                       </span>
                     </Link>
 
-                    <Link
-                      href="/categories"
+                    <a
+                      href="#featured-cakes"
                       className="inline-flex items-center justify-center rounded-full border-2 border-white/80 bg-white/10 px-8 py-4 text-base md:text-lg font-bold text-white backdrop-blur-sm transition hover:bg-white hover:text-[#4A2C1D]"
                     >
-                      View Cakes
-                    </Link>
+                      Explore Cakes
+                    </a>
                   </div>
 
                 </div>
               </div>
+
+              {/* Animated Scroll Down Indicator */}
+              <a
+                href="#featured-cakes"
+                aria-label="Scroll down to featured cakes"
+                className="absolute bottom-8 left-1/2 z-20 -translate-x-1/2 flex flex-col items-center gap-1 text-white/90 transition hover:text-[#D9A11A] animate-bounce"
+              >
+                <span className="text-xs uppercase tracking-widest font-semibold drop-shadow">Scroll Down</span>
+                <ChevronDown size={22} className="drop-shadow" />
+              </a>
 
             </div>
 

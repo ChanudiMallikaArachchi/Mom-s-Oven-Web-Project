@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function FeaturedCakes() {
   return (
-    <section className="bg-[#FFF8F2] py-24">
+    <section id="featured-cakes" className="bg-[#FFF8F2] py-24">
       <div className="mx-auto max-w-7xl px-6">
 
         <motion.div
