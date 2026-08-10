@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, Lock, Eye, EyeOff, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Mail, Lock, Eye, EyeOff, ArrowRight, CheckCircle2, UserPlus } from "lucide-react";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -157,6 +157,18 @@ export default function LoginPage() {
                   </svg>
                   Facebook
                 </button>
+              {/* Create Account Section */}
+              <div className="mt-6 pt-6 border-t border-gray-100 text-center">
+                <p className="text-sm font-medium text-gray-600 mb-3">
+                  Don&apos;t have an account yet?
+                </p>
+                <Link
+                  href="/signup"
+                  className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-[#C97B2A] py-3 text-sm font-bold text-[#C97B2A] transition hover:bg-[#C97B2A] hover:text-white"
+                >
+                  <UserPlus size={18} />
+                  Create New Account
+                </Link>
               </div>
 
             </form>
