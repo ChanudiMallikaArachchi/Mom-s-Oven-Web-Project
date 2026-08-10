@@ -19,7 +19,7 @@ export default function LoginPage() {
 
   return (
     <main className="min-h-screen bg-[#FFF8F2] pb-24 pt-28">
-      <div className="mx-auto max-w-md px-6">
+      <div className="mx-auto max-w-xl px-6">
         
         {/* Card Header */}
         <div className="text-center">
