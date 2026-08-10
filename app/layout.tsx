@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Playfair_Display, Poppins } from "next/font/google";
 import Navbar from "@/app/layout/navbar/navbar";
 import Footer from "@/app/layout/footer/footer";
+import { AuthProvider } from "@/context/AuthContext";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -30,9 +31,11 @@ export default function RootLayout({
       <body
         className={`${playfair.variable} ${poppins.variable}`}
       >
-        <Navbar />
-        {children}
-        <Footer />
+        <AuthProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );

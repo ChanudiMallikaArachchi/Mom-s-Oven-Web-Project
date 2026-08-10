@@ -6,6 +6,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, ShoppingCart, User, Search, X } from "lucide-react";
 
+import { useAuth } from "@/context/AuthContext";
+
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "View Cakes", href: "/categories" },
@@ -14,6 +16,7 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+  const { user, isLoggedIn } = useAuth();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
@@ -101,12 +104,20 @@ export default function Navbar() {
             />
           </button>
 
-          <Link href="/login" aria-label="Account Login" title="Login / Account">
+          <Link
+            href={isLoggedIn ? "/account" : "/login"}
+            aria-label="Account Login"
+            title={isLoggedIn ? `Dashboard (${user?.name})` : "Login / Account"}
+            className="relative"
+          >
             <User
               className={`transition hover:text-[#D9A11A] ${
                 isSolid ? "text-[#6F4422]" : "text-white"
               }`}
             />
+            {isLoggedIn && (
+              <span className="absolute -bottom-1 -right-1 h-2.5 w-2.5 rounded-full bg-green-500 ring-2 ring-white" />
+            )}
           </Link>
 
           <Link href="/cart" className="relative" aria-label="Shopping Cart" title="View Cart">
@@ -160,12 +171,12 @@ export default function Navbar() {
             ))}
 
             <Link
-              href="/login"
-              className="flex items-center gap-3 pt-4 text-[#6F4422] font-semibold text-[#C97B2A]"
+              href={isLoggedIn ? "/account" : "/login"}
+              className="flex items-center gap-3 pt-4 font-semibold text-[#C97B2A]"
               onClick={() => setMobileOpen(false)}
             >
               <User size={20} />
-              Login / Account
+              {isLoggedIn ? `Dashboard (${user?.name})` : "Login / Account"}
             </Link>
 
           </nav>

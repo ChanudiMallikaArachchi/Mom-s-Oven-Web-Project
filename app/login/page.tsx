@@ -2,9 +2,14 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 import { Mail, Lock, Eye, EyeOff, ArrowRight, CheckCircle2, UserPlus } from "lucide-react";
 
 export default function LoginPage() {
+  const { login } = useAuth();
+  const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -14,7 +19,18 @@ export default function LoginPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !password) return;
+
+    const username = email.split("@")[0];
+    const formattedName = username.charAt(0).toUpperCase() + username.slice(1);
+    login({
+      name: formattedName,
+      email: email,
+    });
+
     setSubmitted(true);
+    setTimeout(() => {
+      router.push("/account");
+    }, 1000);
   };
 
   return (

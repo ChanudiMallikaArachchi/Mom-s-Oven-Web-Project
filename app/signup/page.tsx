@@ -2,9 +2,14 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 import { User, Mail, Phone, Lock, Eye, EyeOff, ArrowRight, CheckCircle2 } from "lucide-react";
 
 export default function SignupPage() {
+  const { login } = useAuth();
+  const router = useRouter();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -32,7 +37,16 @@ export default function SignupPage() {
       return;
     }
 
+    login({
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+    });
+
     setSubmitted(true);
+    setTimeout(() => {
+      router.push("/account");
+    }, 1000);
   };
 
   return (
