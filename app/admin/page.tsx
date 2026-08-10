@@ -10,7 +10,6 @@ import {
   ShoppingBag,
   DollarSign,
   Package,
-  Clock,
   Edit,
   Trash2,
   X,
