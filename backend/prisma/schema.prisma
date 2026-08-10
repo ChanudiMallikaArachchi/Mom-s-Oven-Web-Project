@@ -1,0 +1,167 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+enum OrderStatus {
+  RECEIVED
+  BAKING
+  OUT_FOR_DELIVERY
+  DELIVERED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+}
+
+model User {
+  id           String    @id @default(uuid())
+  name         String
+  email        String    @unique
+  phone        String?
+  passwordHash String?
+  googleId     String?
+  role         Role      @default(CUSTOMER)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  addresses    Address[]
+  orders       Order[]
+  cartItems    CartItem[]
+
+  @@index([email])
+}
+
+model Address {
+  id         String   @id @default(uuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  label      String   @default("Home")
+  line1      String
+  line2      String?
+  city       String
+  postalCode String?
+  isDefault  Boolean  @default(false)
+
+  @@index([userId])
+}
+
+model Category {
+  id          String   @id @default(uuid())
+  name        String
+  slug        String   @unique
+  imageUrl    String
+  description String?
+  cakes       Cake[]
+
+  @@index([slug])
+}
+
+model Cake {
+  id            String      @id @default(uuid())
+  title         String
+  slug          String      @unique
+  categoryId    String
+  category      Category    @relation(fields: [categoryId], references: [id])
+  price         Float
+  discountPrice Float?
+  description   String
+  images        String[]
+  isActive      Boolean     @default(true)
+  isFeatured    Boolean     @default(false)
+  stockStatus   String      @default("IN_STOCK")
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  cartItems     CartItem[]
+  orderItems    OrderItem[]
+
+  @@index([slug])
+  @@index([categoryId])
+}
+
+model CartItem {
+  id            String   @id @default(uuid())
+  userId        String?
+  user          User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cartSessionId String?
+  cakeId        String
+  cake          Cake     @relation(fields: [cakeId], references: [id], onDelete: Cascade)
+  quantity      Int      @default(1)
+  customization Json?
+  createdAt     DateTime @default(now())
+
+  @@index([userId])
+  @@index([cartSessionId])
+}
+
+model Order {
+  id            String        @id @default(uuid())
+  orderNumber   String        @unique
+  userId        String?
+  user          User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
+  customerName  String
+  phone         String
+  email         String
+  addressLine   String
+  status        OrderStatus   @default(RECEIVED)
+  paymentMethod String        @default("CARD")
+  paymentStatus PaymentStatus @default(PENDING)
+  subtotal      Float
+  deliveryFee   Float         @default(300.0)
+  total         Float
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  items         OrderItem[]
+  statusHistory OrderStatusHistory[]
+
+  @@index([orderNumber])
+  @@index([userId])
+}
+
+model OrderItem {
+  id                 String   @id @default(uuid())
+  orderId            String
+  order              Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  cakeId             String?
+  cake               Cake?    @relation(fields: [cakeId], references: [id], onDelete: SetNull)
+  cakeTitleSnapshot  String
+  priceSnapshot      Float
+  quantity           Int
+  customization      Json?
+
+  @@index([orderId])
+}
+
+model OrderStatusHistory {
+  id        String      @id @default(uuid())
+  orderId   String
+  order     Order       @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  status    OrderStatus
+  changedAt DateTime    @default(now())
+
+  @@index([orderId])
+}
+
+model Testimonial {
+  id           String   @id @default(uuid())
+  customerName String
+  rating       Int      @default(5)
+  message      String
+  imageUrl     String
+  isPublished  Boolean  @default(true)
+  createdAt    DateTime @default(now())
+}
