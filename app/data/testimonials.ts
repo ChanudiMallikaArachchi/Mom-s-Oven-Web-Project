@@ -4,7 +4,7 @@ export const testimonials = [
     name: "Amanda Silva",
     image: "/images/users.jpg",
     review:
-      "Mom's Oven made my birthday unforgettable! The cake looked beautiful and tasted even better.",
+      "Mom&apos;s Oven made my birthday unforgettable! The cake looked beautiful and tasted even better.",
     rating: 5,
   },
   {
