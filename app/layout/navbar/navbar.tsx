@@ -94,7 +94,7 @@ export default function Navbar() {
 
         </nav>
 
-        {/* Right Icons */}
+        {/* Right Icons & Action Buttons */}
 
         <div className="hidden lg:flex items-center gap-5">
 
@@ -104,10 +104,11 @@ export default function Navbar() {
             />
           </button>
 
+          {/* Account Profile Icon -> Links directly to /account */}
           <Link
-            href={isLoggedIn ? "/account" : "/login"}
-            aria-label="Account Login"
-            title={isLoggedIn ? `Dashboard (${user?.name})` : "Login / Account"}
+            href="/account"
+            aria-label="User Account"
+            title={isLoggedIn ? `Dashboard (${user?.name})` : "My Account"}
             className="relative"
           >
             <User
@@ -120,6 +121,7 @@ export default function Navbar() {
             )}
           </Link>
 
+          {/* Cart Icon */}
           <Link href="/cart" className="relative" aria-label="Shopping Cart" title="View Cart">
 
             <ShoppingCart
@@ -132,6 +134,14 @@ export default function Navbar() {
               0
             </span>
 
+          </Link>
+
+          {/* Login Button to Login Page */}
+          <Link
+            href="/login"
+            className="ml-2 rounded-full bg-[#C97B2A] px-5 py-2 text-sm font-semibold text-white shadow-md transition hover:bg-[#B86A1D]"
+          >
+            Login
           </Link>
 
         </div>
@@ -171,12 +181,20 @@ export default function Navbar() {
             ))}
 
             <Link
-              href={isLoggedIn ? "/account" : "/login"}
-              className="flex items-center gap-3 pt-4 font-semibold text-[#C97B2A]"
+              href="/account"
+              className="flex items-center gap-3 border-b py-4 font-semibold text-[#6F4422]"
               onClick={() => setMobileOpen(false)}
             >
               <User size={20} />
-              {isLoggedIn ? `Dashboard (${user?.name})` : "Login / Account"}
+              {isLoggedIn ? `My Account (${user?.name})` : "My Account"}
+            </Link>
+
+            <Link
+              href="/login"
+              className="mt-4 flex items-center justify-center rounded-full bg-[#C97B2A] py-3 text-sm font-semibold text-white shadow transition hover:bg-[#B86A1D]"
+              onClick={() => setMobileOpen(false)}
+            >
+              Login
             </Link>
 
           </nav>
