@@ -95,22 +95,26 @@ export default function Navbar() {
 
         <div className="hidden lg:flex items-center gap-5">
 
-          <button>
+          <button aria-label="Search">
             <Search
               className={isSolid ? "text-[#6F4422]" : "text-white"}
             />
           </button>
 
-          <Link href="/login">
+          <Link href="/login" aria-label="Account Login" title="Login / Account">
             <User
-              className={isSolid ? "text-[#6F4422]" : "text-white"}
+              className={`transition hover:text-[#D9A11A] ${
+                isSolid ? "text-[#6F4422]" : "text-white"
+              }`}
             />
           </Link>
 
-          <Link href="/cart" className="relative">
+          <Link href="/cart" className="relative" aria-label="Shopping Cart" title="View Cart">
 
             <ShoppingCart
-              className={isSolid ? "text-[#6F4422]" : "text-white"}
+              className={`transition hover:text-[#D9A11A] ${
+                isSolid ? "text-[#6F4422]" : "text-white"
+              }`}
             />
 
             <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-[#D9A11A] text-xs text-white">
@@ -126,6 +130,7 @@ export default function Navbar() {
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
           className="lg:hidden"
+          aria-label="Toggle Menu"
         >
           {mobileOpen ? (
             <X className={isSolid ? "text-[#6F4422]" : "text-white"} />
@@ -147,12 +152,21 @@ export default function Navbar() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="border-b py-4 text-[#6F4422]"
+                className="border-b py-4 text-[#6F4422] font-medium transition hover:text-[#D9A11A]"
                 onClick={() => setMobileOpen(false)}
               >
                 {item.name}
               </Link>
             ))}
+
+            <Link
+              href="/login"
+              className="flex items-center gap-3 pt-4 text-[#6F4422] font-semibold text-[#C97B2A]"
+              onClick={() => setMobileOpen(false)}
+            >
+              <User size={20} />
+              Login / Account
+            </Link>
 
           </nav>
 
